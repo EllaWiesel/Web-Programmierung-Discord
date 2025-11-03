@@ -68,7 +68,8 @@ const loginRes = await axios.post(
         await message.channel.send(`Du hast keine Produkte auf deiner Wunschliste!`);
       }
 
-      for (const product of products) {
+      for (const product of products)
+        {
         
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
         count += 1;
@@ -80,6 +81,15 @@ const loginRes = await axios.post(
       message.reply('Fehler beim Login oder beim Abrufen der Produkte.');
     }
   }
+
+  axios.delete('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login?token=' + token,{
+    token
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
