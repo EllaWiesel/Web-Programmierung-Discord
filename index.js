@@ -81,14 +81,6 @@ const loginRes = await axios.post(
     }
   }
 
-  axios.delete('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login?token=' + token,{
-    token
-  },
-  {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
