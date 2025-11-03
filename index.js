@@ -49,7 +49,13 @@ const loginRes = await axios.post(
         const token = loginRes.data.token;
         console.log(token);
 
-      const productsRes = await axios.get('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/wishlist?token=' + token);
+      if(token == 'OFF')
+      {
+        await message.channel.send(`Keine passenden Anmeldedaten!`);
+      }
+      else
+      {
+        const productsRes = await axios.get('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/wishlist?token=' + token);
 
       
       const products = productsRes.data;
@@ -57,10 +63,16 @@ const loginRes = await axios.post(
 
       var count = 1;
 
+      if (products.length == 0)
+      {
+        await message.channel.send(`Du hast keine Produkte auf deiner Wunschliste!`);
+      }
+
       for (const product of products) {
         
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
         count += 1;
+      }
       }
 
     } catch (err) {
