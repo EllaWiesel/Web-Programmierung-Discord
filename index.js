@@ -31,7 +31,20 @@ client.on('messageCreate', async (message) => {
 
     try {
       
-        const loginRes = await axios.post('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login?username=' + username + '&password=' + password);
+       
+const loginRes = await axios.post(
+  'https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login',
+  {
+    username,
+    password
+  },
+  {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+);
+
 
         const token = loginRes.data.token;
         console.log(token);
