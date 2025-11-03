@@ -33,7 +33,7 @@ client.on('messageCreate', async (message) => {
       
        
 const loginRes = await axios.post(
-  'https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login',
+  'https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login?username='+ username + '&password=' + password,
   {
     username,
     password
