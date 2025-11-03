@@ -66,12 +66,22 @@ client.on("messageCreate", async (message) => {
 
         var count = 1;
 
-        for (const product of products) {
+        if (products.length == 0)
+        {
+          await message.channel.send(
+            `Keine Produkte in der Wishlist`
+          );
+        }
+        else
+        {
+          for (const product of products) {
           await message.channel.send(
             `${count}: ${product.title} with ${product.price} €`
           );
           count += 1;
         }
+        }
+        
       }
     } catch (err) {
       console.error(err);
