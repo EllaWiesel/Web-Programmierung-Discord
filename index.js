@@ -34,10 +34,13 @@ client.on('messageCreate', async (message) => {
         const loginRes = await axios.post('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/login?username=' + username + '&password=' + password);
 
         const token = loginRes.data.token;
+        console.log(token);
 
       const productsRes = await axios.get('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/wishlist?token=' + token);
 
+      
       const products = productsRes.data;
+      console.log(products);
 
       for (const product of products) {
         await message.channel.send(`${product.title} with ${product.price} €`);
