@@ -58,13 +58,15 @@ const loginRes = await axios.post(
         const productsRes = await axios.get('https://bff-webprogrammierung-6322597a0426.herokuapp.com/api/wishlist?token=' + token);
 
       
-if (products.length === 0) {
-  await message.channel.send('No products in wishlist!');
-  return;
-}
+
 
       const products = productsRes.data;
       console.log(products);
+
+        if (products.length === 0) {
+        await message.channel.send('No products in wishlist!');
+        return;
+        }
 
       var count = 1;
 
