@@ -47,7 +47,7 @@ const loginRes = await axios.post(
 
 
         const token = loginRes.data.token;
-        console.log(token);
+        console.log(token + "for username " + username);
 
       if(token == 'OFF')
       {
@@ -61,14 +61,15 @@ const loginRes = await axios.post(
       const products = productsRes.data;
       console.log(products);
 
+        if (products == [])
+        {
+          await message.channel.send(`No products on wishlist!`);
+        }
+
       var count = 1;
 
       for (const product of products)
         {
-        if (!product)
-        {
-          await message.channel.send(`No products on wishlist!`);
-        }
 
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
         count += 1;
