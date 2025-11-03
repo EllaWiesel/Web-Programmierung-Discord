@@ -70,11 +70,6 @@ const loginRes = await axios.post(
       for (const product of products)
         {
 
-          if (products[0] == {}) {
-        await message.channel.send('No products in wishlist!');
-        return;
-        }
-
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
         count += 1;
       }
