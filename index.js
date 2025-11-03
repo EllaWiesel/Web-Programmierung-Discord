@@ -65,7 +65,7 @@ const loginRes = await axios.post(
 
       for (const product of products)
         {
-        if (product == null)
+        if (!product)
         {
           await message.channel.send(`No products on wishlist!`);
         }
