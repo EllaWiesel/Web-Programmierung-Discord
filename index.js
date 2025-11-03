@@ -58,7 +58,7 @@ const loginRes = await axios.post(
       for (const product of products) {
         var count = 1;
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
-        count += 1;
+        count = count + 1;
       }
 
     } catch (err) {
