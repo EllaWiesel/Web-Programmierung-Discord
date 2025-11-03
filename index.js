@@ -5,7 +5,7 @@ const express = require('express');
 
 // Express-Server für Heroku "Keep Alive"
 const app = express();
-app.get('/', (req, res) => res.send('Bot läuft!'));
+app.get('/', (req, res) => res.send('Bot runs!'));
 app.listen(process.env.PORT || 3000);
 
 const client = new Client({
@@ -13,7 +13,7 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-  console.log(`Bot ist online als ${client.user.tag}`);
+  console.log(`Bot is online as ${client.user.tag}`);
 });
 
 client.on('messageCreate', async (message) => {
@@ -25,7 +25,7 @@ client.on('messageCreate', async (message) => {
     const password = args[2];
 
     if (!username || !password) {
-      message.reply('Bitte nutze: `!login <username> <password>`');
+      message.reply('Please use: `!login <username> <password>`');
       return;
     }
 
@@ -51,7 +51,7 @@ const loginRes = await axios.post(
 
       if(token == 'OFF')
       {
-        await message.channel.send(`Keine passenden Anmeldedaten!`);
+        await message.channel.send(`Wrong login-data!`);
       }
       else
       {
@@ -63,14 +63,13 @@ const loginRes = await axios.post(
 
       var count = 1;
 
-      if (products.length == 0)
-      {
-        await message.channel.send(`Du hast keine Produkte auf deiner Wunschliste!`);
-      }
-
       for (const product of products)
         {
-        
+        if (product == null)
+        {
+          await message.channel.send(`No products on wishlist!`);
+        }
+
         await message.channel.send(`${count}: ${product.title} with ${product.price} €`);
         count += 1;
       }
@@ -78,7 +77,7 @@ const loginRes = await axios.post(
 
     } catch (err) {
       console.error(err);
-      message.reply('Fehler beim Login oder beim Abrufen der Produkte.');
+      message.reply('Error while logging in  or getting products of wishlist.');
     }
   }
 
